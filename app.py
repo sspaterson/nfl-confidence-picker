@@ -1,4 +1,3 @@
-%%writefile app.py
 import os
 import requests
 from datetime import datetime, timezone
@@ -51,7 +50,7 @@ def process_slate(games: list) -> list:
             continue
 
         bookmakers = game.get("bookmakers", [])
-        if not bookmakers: 
+        if not bookmakers:
             continue
 
         team_probs = {home_team: [], away_team: []}
@@ -146,7 +145,7 @@ try:
 
             available_points = list(range(1, total_next_week + 1))[::-1]
             table_rows = []
-            
+
             for idx, game in enumerate(next_week_games):
                 pts = available_points[idx]
                 p = game["pick_prob"]
@@ -162,7 +161,7 @@ try:
                     "Expected Pts": f"{pts * p:.2f}",
                     "Books": game["num_books"]
                 })
-            
+
             df = pd.DataFrame(table_rows)
             st.dataframe(df, use_container_width=True, hide_index=True)
         else:
